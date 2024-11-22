@@ -100,7 +100,16 @@ public class Create {
     }
 
     public void setMatrix(int[][] matrix) {
+        if (matrix.length == 0 || matrix[0].length == 0) {
+            this.matrix = new int[0][0];
+            this.row = 0;
+            this.col = 0;
+            return;
+        }
+
         this.matrix = matrix;
+        this.row = matrix.length;
+        this.col = matrix[0].length;
     }
 
     public void printMatrix() {
