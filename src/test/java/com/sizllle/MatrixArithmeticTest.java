@@ -115,6 +115,76 @@ public class MatrixArithmeticTest {
         assertArrayEquals(expected, result.getMatrix());
     }
 
+    @Test
+    void testTransposeRectagularMatrix() {
+        System.out.println("Testing transpose rectagular matrix");
+
+        Create matrix = new Create(2, 3);
+        matrix.setMatrix(new int[][]{
+                {1, 2, 3},
+                {4, 5, 6}
+        });
+
+        int[][] expected = {
+                {1, 4},
+                {2, 5},
+                {3, 6}
+        };
+
+        Create result = MatrixArithmetic.transpose(matrix);
+        assertArrayEquals(expected, result.getMatrix());
+    }
+
+    @Test
+    void testTransposeSingleRowMatrix() {
+        System.out.println("Testing transpose single row matrix");
+
+        Create matrix = new Create(1, 3);
+        matrix.setMatrix(new int[][]{
+                {1, 2, 3}
+        });
+
+        int[][] expected = {
+                {1},
+                {2},
+                {3}
+        };
+
+        Create result = MatrixArithmetic.transpose(matrix);
+        assertArrayEquals(expected, result.getMatrix());
+    }
+
+    @Test
+    void testTransposeSingleColumnMatrix() {
+        System.out.println("Testing transpose single column matrix");
+
+        Create matrix = new Create(3, 1);
+        matrix.setMatrix(new int[][]{
+                {1},
+                {2},
+                {3}
+        });
+
+        int[][] expected = {
+                {1, 2, 3}
+        };
+
+        Create result = MatrixArithmetic.transpose(matrix);
+        assertArrayEquals(expected, result.getMatrix());
+    }
+
+    @Test
+    void testTranspseEmptyMatrix() {
+        System.out.println("Testing transpse empty matrix");
+
+        Create matrix = new Create(0, 0);
+
+        int[][] expected = {};
+
+        Create result = MatrixArithmetic.transpose(matrix);
+        assertArrayEquals(expected, result.getMatrix());
+    }
+
     @AfterEach
     void tearDown() {
         System.out.println("Cleaning up test matrices\n");
