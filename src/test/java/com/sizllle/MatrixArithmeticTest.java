@@ -4,8 +4,7 @@ import org.junit.jupiter.api.AfterEach;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
 
-import static org.junit.jupiter.api.Assertions.assertArrayEquals;
-import static org.junit.jupiter.api.Assertions.assertThrows;
+import static org.junit.jupiter.api.Assertions.*;
 
 public class MatrixArithmeticTest {
 
@@ -174,7 +173,7 @@ public class MatrixArithmeticTest {
     }
 
     @Test
-    void testTranspseEmptyMatrix() {
+    void testTransposeEmptyMatrix() {
         System.out.println("Testing transpse empty matrix");
 
         Create matrix = new Create(0, 0);
@@ -183,6 +182,56 @@ public class MatrixArithmeticTest {
 
         Create result = MatrixArithmetic.transpose(matrix);
         assertArrayEquals(expected, result.getMatrix());
+    }
+
+    @Test
+    void testDeterminant1x1() {
+        System.out.println("Testing determinant 1x1");
+
+        Create matrix = new Create(1, 1);
+        matrix.setMatrix(new int[][]{{5}});
+
+        assertEquals(5, MatrixArithmetic.determinant(matrix));
+    }
+
+    @Test
+    void testDeterminant2x2() {
+        System.out.println("Testing determinant 2x2");
+
+        Create matrix = new Create(2, 2);
+        matrix.setMatrix(new int[][]{
+                {3, 8},
+                {4, 6}
+        });
+
+        assertEquals(-14, MatrixArithmetic.determinant(matrix));
+    }
+
+    @Test
+    void testDeterminant3x3() {
+        System.out.println("Testing determinant 3x3");
+
+        Create matrix = new Create(3, 3);
+        matrix.setMatrix(new int[][]{
+                {6, 1, 1},
+                {4, -2, 5},
+                {2, 8, 7}
+        });
+
+        assertEquals(-306, MatrixArithmetic.determinant(matrix));
+    }
+
+    @Test
+    void testDeterminantNonSquareMatrix() {
+        System.out.println("Testing determinant non square matrix");
+
+        Create matrix = new Create(2, 3);
+        matrix.setMatrix(new int[][]{
+                {1, 2, 3},
+                {4, 5, 6}
+        });
+
+        assertThrows(IllegalArgumentException.class, () -> MatrixArithmetic.determinant(matrix));
     }
 
     @AfterEach

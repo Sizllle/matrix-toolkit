@@ -86,4 +86,56 @@ public class MatrixArithmetic {
         result.setMatrix(transposed);
         return result;
     }
+
+    // Calculate the determinant of a square matrix
+    public static int determinant(Create matrix) {
+        if (matrix.getRow() != matrix.getCol()) {
+            throw new IllegalArgumentException("Determinant can only be calculated for square matrices.");
+        }
+
+        int n = matrix.getRow();
+        int[][] mat = matrix.getMatrix();
+
+        // Base case for 1x1 matrix
+        if (n == 1) {
+            return mat[0][0];
+        }
+
+        // Base case for 2x2 matrix
+        if (n == 2) {
+            return mat[0][0] * mat[1][1] - mat[0][1] * mat[1][0];
+        }
+
+        // Recursive case for larger matrices
+        int det = 0;
+        for (int col = 0; col < n; col++) {
+            det += ((col % 2 == 0) ? 1 : -1) * mat[0][col] * determinant(getSubMatrix(matrix, 0, col));
+        }
+        return det;
+    }
+
+    // Helper method to get the submatrix by excluding a specific row and column
+    private static Create getSubMatrix(Create matrix, int excludeRow, int excludeCol) {
+        int n = matrix.getRow();
+        int[][] original = matrix.getMatrix();
+        int[][] subMatrix = new int[n - 1][n - 1];
+
+        int subRow = 0;
+        for (int i = 0; i < n; i++) {
+            if (i == excludeRow) continue;
+
+            int subCol = 0;
+            for (int j = 0; j < n; j++) {
+                if (j == excludeCol) continue;
+
+                subMatrix[subRow][subCol] = original[i][j];
+                subCol++;
+            }
+            subRow++;
+        }
+
+        Create result = new Create(n - 1, n - 1);
+        result.setMatrix(subMatrix);
+        return result;
+    }
 }
