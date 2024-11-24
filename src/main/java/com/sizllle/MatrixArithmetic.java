@@ -67,4 +67,23 @@ public class MatrixArithmetic {
     public static Create subtraction(Create matrix1, Create matrix2) {
         return applyOperationAddSub(matrix1, matrix2, (a, b) -> a - b);
     }
+
+    // Matrix transpose
+    public static Create transpose(Create matrix) {
+        int rows = matrix.getRow();
+        int cols = matrix.getCol();
+        int[][] original = matrix.getMatrix();
+        int[][] transposed = new int[cols][rows];
+
+        // Swap rows and columns
+        for (int i = 0; i < rows; i++) {
+            for (int j = 0; j < cols; j++) {
+                transposed[j][i] = original[i][j];
+            }
+        }
+
+        Create result = new Create(cols, rows);
+        result.setMatrix(transposed);
+        return result;
+    }
 }

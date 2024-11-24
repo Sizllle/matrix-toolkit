@@ -94,6 +94,27 @@ public class MatrixArithmeticTest {
         assertThrows(IllegalArgumentException.class, () -> MatrixArithmetic.multiply(matrix1, matrix3));
     }
 
+    @Test
+    void testTransposeSquareMatrix() {
+        System.out.println("Testing transpose square matrix");
+
+        Create matrix = new Create(3, 3);
+        matrix.setMatrix(new int[][]{
+                {1, 2, 3},
+                {4, 5, 6},
+                {7, 8, 9}
+        });
+
+        int[][] expected = {
+                {1, 4, 7},
+                {2, 5, 8},
+                {3, 6, 9}
+        };
+
+        Create result = MatrixArithmetic.transpose(matrix);
+        assertArrayEquals(expected, result.getMatrix());
+    }
+
     @AfterEach
     void tearDown() {
         System.out.println("Cleaning up test matrices\n");
